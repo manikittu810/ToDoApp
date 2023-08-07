@@ -5,16 +5,15 @@ import java.time.LocalDate;
 public class ToDo {
     private int id;
     private String userName;
-    private String Description;
-    private LocalDate targetDAte;
+    private String description;
+    private LocalDate targetDate;
     private boolean done;
 
-    public ToDo(int id, String userName, String description, LocalDate targetDAte, boolean done) {
-        super();
+    public ToDo(int id, String userName, String description, LocalDate targetDate, boolean done) {
         this.id = id;
         this.userName = userName;
-        Description = description;
-        this.targetDAte = targetDAte;
+        this.description = description;
+        this.targetDate = targetDate;
         this.done = done;
     }
 
@@ -34,20 +33,20 @@ public class ToDo {
         this.userName = userName;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getdescription() {
+        return description;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setdescription(String description) {
+        description = description;
     }
 
-    public LocalDate getTargetDAte() {
-        return targetDAte;
+    public LocalDate gettargetDate() {
+        return targetDate;
     }
 
-    public void setTargetDAte(LocalDate targetDAte) {
-        this.targetDAte = targetDAte;
+    public void settargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;
     }
 
     public boolean isDone() {
@@ -63,8 +62,8 @@ public class ToDo {
         return "ToDo{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
-                ", Description='" + Description + '\'' +
-                ", targetDAte=" + targetDAte +
+                ", description='" + description + '\'' +
+                ", targetDate=" + targetDate +
                 ", done=" + done +
                 '}';
     }
