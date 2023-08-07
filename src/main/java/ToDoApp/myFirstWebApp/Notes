@@ -1,0 +1,24 @@
+##ToDo
+id
+username
+description
+targetDate
+done
+
+Generate constructor
+generate setters,getters,toString()
+
+Now we need a database to store these values ,we will use mySQL
+ first we will create a static list of todos i.e local H2 DB and later we can shift them to MYSQL.
+ ---------------------------------------------------------------------------------------------------
+ Things needed to list in a page
+ 1.ToDo controller
+ 2.Redirect a list ToDos
+--------------------------------------------------------------------------------------------------------
+div>Your ToDo's are :${todos}</div> ->{todos}->todos ->here should match with  model.addAttribute("todos",todos);
+todos in the model.add...... then only the view renders.
+
+
+-------------------------------------------------------------------------------------------------------------
+
+Research about Request vsModel vs Session
