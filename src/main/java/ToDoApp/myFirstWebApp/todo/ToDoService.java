@@ -34,4 +34,11 @@ public class ToDoService {
                 =todo->todo.getId()==id;
         toDos.removeIf(predicate);
     }
+
+    public ToDo findById(int id) {
+        Predicate<? super ToDo> predicate
+                =todo->todo.getId()==id;
+         ToDo todo=toDos.stream().filter(predicate).findFirst().get();
+        return todo;
+    }
 }
