@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+
 @Service
 public class ToDoService {
     private static List<ToDo> toDos=new ArrayList<>();
@@ -24,5 +26,12 @@ public class ToDoService {
     public static void addToDo(String username, String descrpition, LocalDate targetDate, boolean done){
         ToDo todo =new ToDo(++ToDosCount,username,descrpition,targetDate,done);
     toDos.add(todo);
+    }
+    public void deleteById(int id){
+        //todo.getId()==id
+        //todo->todo.getId()==id this is a lambda function
+        Predicate<? super ToDo> predicate
+                =todo->todo.getId()==id;
+        toDos.removeIf(predicate);
     }
 }
