@@ -1,10 +1,13 @@
 package ToDoApp.myFirstWebApp.todo;
 
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDate;
 
 public class ToDo {
     private int id;
     private String userName;
+    @Size(min = 5,message = "Enter atleast 5 characters")
     private String description;
     private LocalDate targetDate;
     private boolean done;

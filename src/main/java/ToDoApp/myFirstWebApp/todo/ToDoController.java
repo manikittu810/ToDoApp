@@ -30,18 +30,24 @@ public class ToDoController {
     }
 
     @RequestMapping(value="add-todo",method = RequestMethod.GET)
-    public String ShowNewTodoPage() {
-        return "todo";
+    public String ShowNewTodoPage(ModelMap model) {
+
+        String username=(String)model.get("name");
+
+        ToDo toDo=new ToDo(0,username,"",LocalDate.now().plusYears(1),false);
+        model.put("toDo",toDo);
+
+    return "todo";
     }
 
 
     @RequestMapping(value="add-todo",method = RequestMethod.POST)
 
-    public String addNewTodo(@RequestParam String description,ModelMap model){
+    public String addNewTodo(ModelMap model,ToDo toDo){
 
     String username=(String)model.get("name");
 
-    ToDoService.addToDo(username,description,
+    ToDoService.addToDo(username,toDo.getdescription(),
             LocalDate.now().plusYears(1) ,false);
 
         return "redirect:list-todos";
