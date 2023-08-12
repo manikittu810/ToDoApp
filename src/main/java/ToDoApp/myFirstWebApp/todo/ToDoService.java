@@ -27,7 +27,10 @@ public static void updateTodo(@Valid ToDo toDo) {
 }
 
 public List<ToDo> findByUserName(String username){
-    return toDos;
+
+    Predicate<? super ToDo> predicate
+            =toDo-> toDo.getUserName() == username;
+    return toDos.stream().filter(predicate).toList();
 }
 
 public static void addToDo(String username, String descrpition, LocalDate targetDate, boolean done){

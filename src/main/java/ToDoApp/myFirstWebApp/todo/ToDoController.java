@@ -20,24 +20,29 @@ public class ToDoController {
 private ToDoService toDoService;
 
 public ToDoController(ToDoService toDoService) {
-    super();
-    this.toDoService = toDoService;
+super();
+this.toDoService = toDoService;
 }
 
 @RequestMapping("list-todos")
 public String listAllToDos(ModelMap model){
-    List<ToDo> todos =toDoService.findByUserName("smk");
-    model.addAttribute("todos",todos);
-    return "listToDos";
+String username= getLoggedInUsername(model);
+List<ToDo> todos =toDoService.findByUserName(username);
+model.addAttribute("todos",todos);
+return "listToDos";
 }
 
-@RequestMapping(value="add-todo",method = RequestMethod.GET)
+    private static String getLoggedInUsername(ModelMap model) {
+        return (String) model.get("name");
+    }
+
+    @RequestMapping(value="add-todo",method = RequestMethod.GET)
 public String ShowNewTodoPage(ModelMap model) {
 
-    String username=(String)model.get("name");
+String username= getLoggedInUsername(model);
 
-    ToDo toDo=new ToDo(0,username,"",LocalDate.now().plusYears(1),false);
-    model.put("toDo",toDo);
+ToDo toDo=new ToDo(0,username,"",LocalDate.now().plusYears(1),false);
+model.put("toDo",toDo);
 
 return "todo";
 }
@@ -46,40 +51,40 @@ return "todo";
 @RequestMapping(value="add-todo",method = RequestMethod.POST)
 
 public String addNewTodo(ModelMap model, @Valid ToDo toDo, BindingResult result){
-    if(result.hasErrors()){
-        return "todo";
-    }
+if(result.hasErrors()){
+    return "todo";
+}
 
-String username=(String)model.get("name");
+String username= getLoggedInUsername(model);
 
 ToDoService.addToDo(username,toDo.getdescription(),
-        toDo.gettargetDate() ,false);
+    toDo.gettargetDate() ,false);
 
-    return "redirect:list-todos";
+return "redirect:list-todos";
 
 }
 @RequestMapping("delete-todo")
 public String deleteTodo(@RequestParam int id){
-    toDoService.deleteById(id);
-    return "redirect:list-todos";
+toDoService.deleteById(id);
+return "redirect:list-todos";
 }
 
 @RequestMapping(value="update-todo",method = RequestMethod.GET)
 public String showUpdateTodo(@RequestParam int id,ModelMap model){
-    ToDo todo =toDoService.findById(id);
-    model.addAttribute("toDo",todo);
-    return "todo";
+ToDo todo =toDoService.findById(id);
+model.addAttribute("toDo",todo);
+return "todo";
 }
 
 @RequestMapping(value="update-todo",method = RequestMethod.POST)
 
 public String updateTodo(ModelMap model, @Valid ToDo toDo, BindingResult result){
-    if(result.hasErrors()){
-        return "todo";
-    }
-    String username=(String)model.get("name");
-    ToDoService.updateTodo(toDo);
-    return "redirect:list-todos";
+if(result.hasErrors()){
+    return "todo";
+}
+String username= getLoggedInUsername(model);
+ToDoService.updateTodo(toDo);
+return "redirect:list-todos";
 
 }
 }
