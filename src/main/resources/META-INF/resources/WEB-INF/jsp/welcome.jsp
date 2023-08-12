@@ -1,12 +1,10 @@
-<html>
-<head>
-    <title>login page</title>
-</head>
-<body>
+<%@ include file="common/header.jspf"%>
+
+
+<%@ include file="common/navigation.jspf"%>
 <div class="container">
 
-    <div>Welcome :${name}</div>
-    <div><a href="list-todos">Manage </a>Your ToDo's </div>
-</div>
-</body>
-</html>
+<div>Welcome :${name}</div>
+<div><a href="list-todos">Manage </a>Your ToDo's </div>
+
+<%@ include file="common/footer.jspf"%>
