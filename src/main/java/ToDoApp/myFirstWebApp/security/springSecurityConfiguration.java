@@ -12,19 +12,27 @@ import java.util.function.Function;
 
 @Configuration
 public class springSecurityConfiguration {
-    @Bean
+@Bean
 public InMemoryUserDetailsManager createUserDetailManager(){
+    UserDetails userDetails1 = createNewUser("Smk123", "smk");
+    UserDetails userDetails2 = createNewUser("Sms123", "sms");
+    return new InMemoryUserDetailsManager(userDetails1,userDetails2);
+}
+
+    private UserDetails createNewUser(String username, String password) {
         Function<String, String> passwordEncoder=
                 input-> passwordEncoder().encode(input);
         UserDetails userDetails=User.builder().passwordEncoder(passwordEncoder)
-                .username("Smk123")
-                .password("smk")
+                .username(username)
+                .password(password)
                 .roles("USER","ADMIN").build();
-        return new InMemoryUserDetailsManager(userDetails);
+        return userDetails;
     }
-@Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+
+
+    @Bean
+public PasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
 }
 
 }

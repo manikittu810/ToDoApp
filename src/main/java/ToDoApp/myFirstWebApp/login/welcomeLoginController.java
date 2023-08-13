@@ -19,9 +19,9 @@ model.put("name",getLoggedInUsername());
 return "welcome";
 }
 private String getLoggedInUsername(){
-    Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
 
-    return authentication.getName();
+return authentication.getName();
 }
 
 }

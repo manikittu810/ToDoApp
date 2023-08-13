@@ -23,7 +23,9 @@ public ToDoController(ToDoService toDoService) {
 super();
 this.toDoService = toDoService;
 }
-
+    private static String getLoggedInUsername(ModelMap model) {
+        return (String) model.get("name");
+    }
 @RequestMapping("list-todos")
 public String listAllToDos(ModelMap model){
 String username= getLoggedInUsername(model);
@@ -32,11 +34,9 @@ model.addAttribute("todos",todos);
 return "listToDos";
 }
 
-    private static String getLoggedInUsername(ModelMap model) {
-        return (String) model.get("name");
-    }
 
-    @RequestMapping(value="add-todo",method = RequestMethod.GET)
+
+@RequestMapping(value="add-todo",method = RequestMethod.GET)
 public String ShowNewTodoPage(ModelMap model) {
 
 String username= getLoggedInUsername(model);
@@ -52,13 +52,13 @@ return "todo";
 
 public String addNewTodo(ModelMap model, @Valid ToDo toDo, BindingResult result){
 if(result.hasErrors()){
-    return "todo";
+return "todo";
 }
 
 String username= getLoggedInUsername(model);
 
 ToDoService.addToDo(username,toDo.getdescription(),
-    toDo.gettargetDate() ,false);
+toDo.gettargetDate() ,false);
 
 return "redirect:list-todos";
 
@@ -80,9 +80,10 @@ return "todo";
 
 public String updateTodo(ModelMap model, @Valid ToDo toDo, BindingResult result){
 if(result.hasErrors()){
-    return "todo";
+return "todo";
 }
 String username= getLoggedInUsername(model);
+    toDo.setUserName(username);
 ToDoService.updateTodo(toDo);
 return "redirect:list-todos";
 

@@ -13,42 +13,42 @@ public class ToDoService {
 private static List<ToDo> toDos=new ArrayList<>();
 public static int ToDosCount=0 ;
 static{
-    toDos.add(new ToDo(++ToDosCount,"smk","Learn Azure",
-            LocalDate.now().plusYears(1),false));
-    toDos.add(new ToDo(++ToDosCount,"sms","Learn AWS",
-            LocalDate.now().plusYears(2),false));
-    toDos.add(new ToDo(++ToDosCount,"Diddy","Learn SalesForce",
-            LocalDate.now().plusYears(3),false));
+toDos.add(new ToDo(++ToDosCount,"smk","Learn Azure",
+        LocalDate.now().plusYears(1),false));
+toDos.add(new ToDo(++ToDosCount,"sms","Learn AWS",
+        LocalDate.now().plusYears(2),false));
+toDos.add(new ToDo(++ToDosCount,"Diddy","Learn SalesForce",
+        LocalDate.now().plusYears(3),false));
 }
 
 public static void updateTodo(@Valid ToDo toDo) {
-    deleteById(toDo.getId());
-    toDos.add(toDo);
+deleteById(toDo.getId());
+toDos.add(toDo);
 }
 
 public List<ToDo> findByUserName(String username){
 
-    Predicate<? super ToDo> predicate
-            =toDo-> toDo.getUserName() == username;
-    return toDos.stream().filter(predicate).toList();
+Predicate<? super ToDo> predicate
+        =toDo-> toDo.getUserName().equalsIgnoreCase(username);
+return toDos.stream().filter(predicate).toList();
 }
 
 public static void addToDo(String username, String descrpition, LocalDate targetDate, boolean done){
-    ToDo todo =new ToDo(++ToDosCount,username,descrpition,targetDate,done);
+ToDo todo =new ToDo(++ToDosCount,username,descrpition,targetDate,done);
 toDos.add(todo);
 }
 public static void deleteById(int id){
-    //todo.getId()==id
-    //todo->todo.getId()==id this is a lambda function
-    Predicate<? super ToDo> predicate
-            =toDo->toDo.getId()==id;
-    toDos.removeIf(predicate);
+//todo.getId()==id
+//todo->todo.getId()==id this is a lambda function
+Predicate<? super ToDo> predicate
+        =toDo->toDo.getId()==id;
+toDos.removeIf(predicate);
 }
 
 public ToDo findById(int id) {
-    Predicate<? super ToDo> predicate
-            =toDo->toDo.getId()==id;
-     ToDo todo=toDos.stream().filter(predicate).findFirst().get();
-    return todo;
+Predicate<? super ToDo> predicate
+        =toDo->toDo.getId()==id;
+ ToDo todo=toDos.stream().filter(predicate).findFirst().get();
+return todo;
 }
 }
