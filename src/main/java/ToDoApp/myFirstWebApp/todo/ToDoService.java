@@ -13,11 +13,11 @@ public class ToDoService {
 private static List<ToDo> toDos=new ArrayList<>();
 public static int ToDosCount=0 ;
 static{
-toDos.add(new ToDo(++ToDosCount,"smk","Learn Azure",
+toDos.add(new ToDo(++ToDosCount,"smk","Learn Azure 1",
         LocalDate.now().plusYears(1),false));
-toDos.add(new ToDo(++ToDosCount,"sms","Learn AWS",
+toDos.add(new ToDo(++ToDosCount,"sms","Learn AWS 1",
         LocalDate.now().plusYears(2),false));
-toDos.add(new ToDo(++ToDosCount,"Diddy","Learn SalesForce",
+toDos.add(new ToDo(++ToDosCount,"Diddy","Learn SalesForce 1",
         LocalDate.now().plusYears(3),false));
 }
 
@@ -29,12 +29,12 @@ toDos.add(toDo);
 public List<ToDo> findByUserName(String username){
 
 Predicate<? super ToDo> predicate
-        =toDo-> toDo.getUserName().equalsIgnoreCase(username);
+        =toDo -> toDo.getUserName().equalsIgnoreCase(username);
 return toDos.stream().filter(predicate).toList();
 }
 
-public static void addToDo(String username, String descrpition, LocalDate targetDate, boolean done){
-ToDo todo =new ToDo(++ToDosCount,username,descrpition,targetDate,done);
+public static void addToDo(String userName, String description, LocalDate targetDate, boolean done){
+ToDo todo =new ToDo(++ToDosCount,userName,description,targetDate,done);
 toDos.add(todo);
 }
 public static void deleteById(int id){

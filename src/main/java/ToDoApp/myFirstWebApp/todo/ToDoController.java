@@ -14,7 +14,7 @@ import java.util.List;
 
 import static ToDoApp.myFirstWebApp.todo.ToDoService.*;
 
-@Controller
+//@Controller
 @SessionAttributes("name")
 public class ToDoController {
 private ToDoService toDoService;
